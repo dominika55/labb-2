@@ -118,6 +118,38 @@ int main() {
             
             if (index_slot >= 0 && index_slot < SIZE) inventory[index_slot] = 0;
             break;
-       }
+
+        case 6: {
+            
+            for (int i = 0; i < SIZE; ++i) {
+                printf("Слот %d: [%d] (%s)\n", i, inventory[i], names[inventory[i]]);
+            }
+
+            int array[SIZE] = {0};
+            for (int i = 0; i < SIZE; ++i) {
+
+                if (inventory[i] == ITEM_EMPTY) {
+                    continue;
+                }
+
+                if (array[inventory[i]] == 1) {
+                    inventory[i] = ITEM_EMPTY;
+                }
+
+                else {
+                    array[inventory[i]] = 1;
+                }
+            }
+            printf("\n");
+            for (int i = 0; i < SIZE; ++i) {
+                printf("Слот %d: [%d] (%s)\n", i, inventory[i], names[inventory[i]]);
+            }
+            break;
+        }
+            
+        default:
+            printf("Неизвестный пункт меню!\n");
+            break;
+        }
     }
 }

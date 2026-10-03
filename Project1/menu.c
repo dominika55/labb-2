@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <locale.h>
 
@@ -90,6 +88,36 @@ int main() {
             }
             printf("\n");
             break;
+
+        case 4: {
+            int index;
+            int ID;
+            
+            printf("Введите индекс слота (от 0 до 9) и ID предмета\n");
+            
+            if (scanf_s("%d %d", &index, &ID) != 2) {
+                printf("Ошибка: введите два целых числа.\n");
+                while (getchar() != '\n');
+                continue;
+            }
+            
+            if (index >= 0 && index < SIZE && ID >= 0 && ID < SIZE) inventory[index] = ID;
+            break;
         }
+
+        case 5: {
+            int index_slot;
+            
+            printf("Введите индекс слота от 0 до 9\n");
+            
+            if (scanf_s("%d", &index_slot) != 1) {
+                printf("Ошибка: введите одно целое число.\n");
+                while (getchar() != '\n');
+                continue;
+            }
+            
+            if (index_slot >= 0 && index_slot < SIZE) inventory[index_slot] = 0;
+            break;
+       }
     }
 }

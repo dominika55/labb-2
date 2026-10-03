@@ -1,0 +1,95 @@
+
+
+#include <stdio.h>
+#include <locale.h>
+
+
+#define SIZE 10
+#define DAY 1
+#define HOUR 8
+
+#define ITEM_EMPTY    0
+#define ITEM_WOOD     1
+#define ITEM_STONE    2
+#define ITEM_SEEDS    3
+#define ITEM_BERRIES  4
+#define ITEM_WATER    5
+#define ITEM_SAND     6
+#define ITEM_STICK    7
+#define ITEM_COAL     8
+#define ITEM_BARK     9
+
+int main() {
+    setlocale(LC_ALL, "");
+
+    int current_day = DAY, current_hour = HOUR;
+
+    int inventory[SIZE] = {
+           ITEM_EMPTY,   ITEM_WOOD, ITEM_STONE,  ITEM_SEEDS,
+           ITEM_BERRIES,  ITEM_WATER, ITEM_SAND, ITEM_STICK,
+           ITEM_COAL,  ITEM_BARK };
+
+    char names[SIZE][100] = {
+        "пусто", "дерево", "камень", "семена",
+        "ягоды", "вода", "песок", "палка", "уголь",
+        "кора"
+    };
+
+    int menu_item;
+
+    while (1) {
+
+        printf("0. Выход\n");
+        printf("1. Посмотреть время\n");
+        printf("2. Промотать время\n");
+        printf("3. Посмотреть инвентарь\n");
+        printf("4. Положить предмет в слот\n");
+        printf("5. Выбросить предмет\n");
+        printf("6. Устранение дубликатов \n");
+
+        if (scanf_s("%d", &menu_item) != 1) {
+            printf("Ошибка: введите одно целое число.\n");
+            while (getchar() != '\n');
+            continue;
+        }
+
+        switch (menu_item)
+        {
+
+        case 0:
+            return 0;
+
+        case 1:
+            printf("Текущее время: День %d, %02d:%02d\n", current_day, current_hour, current_hour / 60);
+            break;
+
+        case 2: {
+            int work_hours;
+
+            printf("Введите кол-во часов на работу");
+
+            if (scanf_s("%d", &work_hours) != 1) {
+                printf("Ошибка: введите одно целое число.\n");
+                while (getchar() != '\n');
+                continue;
+            }
+
+            current_hour += work_hours;
+
+            if (current_hour >= 24) current_day += current_hour / 24;
+            current_hour %= 24;
+
+            printf("Текущее время: День %d, %02d:%02d\n", current_day, current_hour, current_hour / 60);
+            break;
+        }
+
+        case 3:
+            for (int i = 0; i < SIZE; ++i) {
+                if (i == SIZE - 1) printf("Слот %d: [%d] (%s)\n", i, inventory[i], names[inventory[i]]);
+                else printf("Слот %d: [%d] (%s), ", i, inventory[i], names[inventory[i]]);
+            }
+            printf("\n");
+            break;
+        }
+    }
+}

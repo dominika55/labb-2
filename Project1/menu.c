@@ -58,7 +58,7 @@ int main() {
             return 0;
 
         case 1:
-            printf("Текущее время: День %d, %02d:%02d\n", current_day, current_hour, current_hour / 60);
+            printf("Текущее время: День %d, %02d:00\n", current_day, current_hour);
             break;
 
         case 2: {
@@ -77,7 +77,7 @@ int main() {
             if (current_hour >= 24) current_day += current_hour / 24;
             current_hour %= 24;
 
-            printf("Текущее время: День %d, %02d:%02d\n", current_day, current_hour, current_hour / 60);
+            printf("Текущее время: День %d, %02d:00\n", current_day, current_hour);
             break;
         }
 
